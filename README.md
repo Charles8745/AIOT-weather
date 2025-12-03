@@ -6,6 +6,14 @@
 
 一個功能完整、介面美觀的台灣天氣資訊互動式網站，提供即時天氣、精準預報，一目了然。
 
+## 🌐 Demo Site
+
+**線上展示網站**: [https://aiot-weather-vesae2s9zpz6zpe2vcgqsa.streamlit.app/](https://aiot-weather-vesae2s9zpz6zpe2vcgqsa.streamlit.app/)
+
+立即體驗完整功能，無需安裝！
+
+---
+
 ![Taiwan Weather Dashboard](assets/images/screenshot.png)
 
 ## ✨ 專案特色
