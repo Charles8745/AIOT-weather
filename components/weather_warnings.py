@@ -228,6 +228,25 @@ def render_warning_card(warning: pd.Series):
     """, unsafe_allow_html=True)
 
 
+def display_warnings_list(warnings_data: Dict[str, Any]):
+    """
+    顯示警報列表（用於一頁式設計）
+    
+    Args:
+        warnings_data: 警報資料
+    """
+    # 處理資料
+    warnings_df = process_warnings_data(warnings_data)
+    
+    if warnings_df.empty:
+        st.info('✅ 目前無天氣警特報')
+        return
+    
+    # 顯示警報卡片
+    for _, warning in warnings_df.iterrows():
+        render_warning_card(warning)
+
+
 def render_warnings_page():
     """渲染天氣警特報頁面"""
     st.subheader('⚠️ 天氣警特報')

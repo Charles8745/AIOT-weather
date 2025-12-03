@@ -1,0 +1,574 @@
+/* Glassmorphism 玻璃擬態風格樣式 */
+
+/* 全域設定 */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --accent-color: #4A90E2;
+    --danger-color: #E94B3C;
+    --warning-color: #F5A623;
+    --success-color: #7ED321;
+}
+
+/* 移除預設的 Streamlit 邊距和背景 */
+.main > div {
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+.block-container {
+    padding: 2rem 3rem !important;
+    max-width: 100% !important;
+}
+
+/* 背景設定 - 使用 base64 或直接路徑 */
+.stApp {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
+                url('data:image/jpeg;base64,...') center/cover fixed no-repeat;
+}
+
+/* 如果 base64 太大，使用動態載入 */
+section[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, rgba(30, 40, 60, 0.95) 0%, rgba(20, 30, 50, 0.9) 100%);
+}
+
+section[data-testid="stAppViewContainer"]::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/_MMO2513.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.85;
+    z-index: -2;
+}
+
+section[data-testid="stAppViewContainer"]::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 25, 40, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+}
+
+/* 隱藏預設的側邊欄和頂部空白 */
+section[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+}
+
+/* 主標題樣式 */
+h1 {
+    color: var(--text-primary) !important;
+    text-align: center !important;
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Glassmorphism 卡片基礎樣式 - 增強版 */
+.glass-card {
+    background: rgba(255, 255, 255, 0.09) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.3), 
+                rgba(255, 255, 255, 0.05));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                  linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Streamlit 欄位套用玻璃效果 */
+div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div,
+div[data-testid="column"] {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 8px 32px 0 var(--glass-shadow) !important;
+    padding: 1.5rem !important;
+}
+
+/* 文字顏色 */
+p, span, div, label {
+    color: var(--text-secondary) !important;
+}
+
+h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Metric 元件樣式 */
+div[data-testid="stMetric"] {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 15px !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 1rem !important;
+}
+
+div[data-testid="stMetricValue"] {
+    color: var(--text-primary) !important;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+}
+
+/* Tab 樣式 */
+.stTabs {
+    background: transparent !important;
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    gap: 1rem !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 15px !important;
+    padding: 0.5rem !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: var(--accent-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* 按鈕樣式 */
+.stButton > button {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton > button:hover {
+    background: var(--accent-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3) !important;
+}
+
+/* Select Box 樣式 */
+.stSelectbox > div > div {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+/* 大型天氣顯示 - 增強玻璃效果 */
+.weather-hero {
+    text-align: center;
+    padding: 2rem 3rem;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-radius: 30px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    margin: 1.5rem auto;
+    max-width: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.weather-hero .temperature {
+    font-size: 7rem;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6),
+                 0 0 60px rgba(255, 255, 255, 0.3);
+    line-height: 1;
+    letter-spacing: -5px;
+}
+
+.weather-hero .location {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+}
+
+.weather-hero .description {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* 小卡片網格 - 增強玻璃效果 */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px) saturate(150%);
+    -webkit-backdrop-filter: blur(25px) saturate(150%);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.info-card:hover::after {
+    opacity: 1;
+}
+
+.info-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.info-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.info-card .label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* 一週預報卡片 */
+.forecast-day {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.forecast-day:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.forecast-day .day-name {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.forecast-day .icon {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+.forecast-day .temp-high {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.forecast-day .temp-low {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Plotly 圖表樣式 */
+.js-plotly-plot {
+    background: transparent !important;
+}
+
+.plot-container {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 1rem !important;
+}
+
+/* 警報卡片 */
+.alert-card {
+    background: rgba(233, 75, 60, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 4px solid var(--danger-color) !important;
+    border-radius: 15px !important;
+    padding: 1rem 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.warning-card {
+    background: rgba(245, 166, 35, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 4px solid var(--warning-color) !important;
+    border-radius: 15px !important;
+    padding: 1rem 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+/* 空氣品質指示器 */
+.aqi-good {
+    background: rgba(126, 211, 33, 0.2) !important;
+    border-left: 4px solid var(--success-color) !important;
+}
+
+.aqi-moderate {
+    background: rgba(245, 166, 35, 0.2) !important;
+    border-left: 4px solid var(--warning-color) !important;
+}
+
+.aqi-bad {
+    background: rgba(233, 75, 60, 0.2) !important;
+    border-left: 4px solid var(--danger-color) !important;
+}
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 載入動畫 */
+.stSpinner > div {
+    border-color: var(--accent-color) !important;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    .weather-hero .temperature {
+        font-size: 5rem;
+    }
+    
+    .weather-hero .description {
+        font-size: 1.5rem;
+    }
+    
+    .block-container {
+        padding: 1rem !important;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .weather-hero .temperature {
+        font-size: 4rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-card,
+.info-card,
+.forecast-day {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 成功訊息 */
+.stSuccess {
+    background: rgba(126, 211, 33, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 4px solid var(--success-color) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+/* 錯誤訊息 */
+.stError {
+    background: rgba(233, 75, 60, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 4px solid var(--danger-color) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+/* 資訊訊息 */
+.stInfo {
+    background: rgba(74, 144, 226, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 4px solid var(--accent-color) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+/* Expander 樣式 */
+.streamlit-expanderHeader {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-primary) !important;
+}
+
+/* DataFrame 樣式 */
+.dataframe {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+}
+
+.dataframe th {
+    background: rgba(74, 144, 226, 0.3) !important;
+    color: var(--text-primary) !important;
+}
+
+.dataframe td {
+    color: var(--text-secondary) !important;
+}

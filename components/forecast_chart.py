@@ -292,6 +292,38 @@ def create_rain_prob_chart(df: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def display_week_forecast_charts(week_data: List[Dict[str, Any]], city: str):
+    """
+    顯示一週預報圖表（用於一頁式設計）
+    
+    Args:
+        week_data: 一週預報資料列表
+        city: 縣市名稱
+    """
+    if not week_data:
+        st.info('📊 暫無一週預報資料')
+        return
+    
+    # 解析資料
+    api_data = get_week_forecast_data(city)
+    if api_data:
+        df = parse_week_forecast(api_data, city)
+        
+        if df is not None and not df.empty:
+            # 建立兩欄顯示圖表
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown('#### 📈 溫度趨勢')
+                temp_chart = create_temperature_chart(df)
+                st.plotly_chart(temp_chart, width='stretch')
+            
+            with col2:
+                st.markdown('#### 🌧️ 降雨機率')
+                rain_chart = create_rain_prob_chart(df)
+                st.plotly_chart(rain_chart, width='stretch')
+
+
 def render_week_forecast(city: str):
     """
     渲染一週天氣預報

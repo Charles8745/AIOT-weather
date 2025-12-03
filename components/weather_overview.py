@@ -105,6 +105,72 @@ def create_overview_dataframe(all_data: Dict[str, Any]) -> pd.DataFrame:
     return df
 
 
+def render_overview_content():
+    """渲染縣市預報總覽內容（不含標題）- 用於嵌入"""
+    all_data = get_all_cities_forecast()
+    
+    if not all_data:
+        st.error('❌ 無法載入縣市資料')
+        return
+    
+    df = create_overview_dataframe(all_data)
+    
+    if df.empty:
+        st.warning('⚠️ 目前無可用資料')
+        return
+    
+    # 顯示選項
+    col1, col2 = st.columns([1, 3])
+    
+    with col1:
+        view_mode = st.radio(
+            '顯示模式',
+            ['卡片檢視', '表格檢視'],
+            key='overview_view_mode'
+        )
+    
+    with col2:
+        search_city = st.text_input(
+            '🔍 搜尋縣市',
+            placeholder='輸入縣市名稱...',
+            key='overview_search'
+        )
+    
+    # 篩選
+    filtered_df = df
+    if search_city:
+        filtered_df = df[df['縣市'].str.contains(search_city)]
+    
+    if view_mode == '卡片檢視':
+        # 卡片顯示
+        cols_per_row = 3
+        rows = [filtered_df.iloc[i:i+cols_per_row] for i in range(0, len(filtered_df), cols_per_row)]
+        
+        for row_df in rows:
+            cols = st.columns(cols_per_row)
+            
+            for idx, (_, city_data) in enumerate(row_df.iterrows()):
+                with cols[idx]:
+                    rain_prob = city_data['降雨機率']
+                    border_color = '#3498db' if rain_prob >= 70 else '#f39c12' if rain_prob >= 40 else '#95a5a6'
+                    
+                    st.markdown(f"""
+                    <div style="background: rgba(255, 255, 255, 0.1); 
+                                border-left: 4px solid {border_color};
+                                border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="font-size: 2rem; margin-right: 0.5rem;">{city_data['圖示']}</span>
+                            <span style="font-size: 1.1rem; font-weight: 600; color: white;">{city_data['縣市']}</span>
+                        </div>
+                        <div style="color: rgba(255,255,255,0.9); margin: 0.3rem 0;">{city_data['天氣']}</div>
+                        <div style="color: rgba(255,255,255,0.8); margin: 0.3rem 0;">🌡️ {city_data['最低溫']}°C ~ {city_data['最高溫']}°C</div>
+                        <div style="color: rgba(255,255,255,0.8); margin: 0.3rem 0;">💧 {city_data['降雨機率']}%</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+    else:
+        st.dataframe(filtered_df, use_container_width=True, hide_index=True)
+
+
 def render_overview_page():
     """渲染縣市預報總覽頁面"""
     st.subheader('📊 全台縣市預報總覽')

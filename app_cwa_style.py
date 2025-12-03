@@ -89,29 +89,27 @@ if parsed_data:
     with left_col:
         st.markdown(f'''
         <div class="weather-card">
-            <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem; text-align: center; font-weight: 600;">
-                📊 目前狀態
-            </h3>
-            <div style="text-align: center; padding: 1rem 0;">
-                <div style="font-size: 3.5rem; margin: 1rem 0;">
+            <div style="text-align: center;">
+                <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem;">📊 目前狀態</h3>
+                <div style="font-size: 3.5rem; margin: 1.5rem 0;">
                     {get_weather_icon(today_summary["weather_summary"])}
                 </div>
-                <div style="font-size: 1.25rem; color: #2C3E50; font-weight: 600; margin: 1rem 0;">
+                <div style="font-size: 1.3rem; color: #2C3E50; font-weight: 600; margin-bottom: 1.5rem;">
                     {today_summary["weather_summary"]}
                 </div>
-            </div>
-            <div style="border-top: 2px solid #E8EEF2; padding-top: 1rem; margin-top: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0;">
-                    <span style="color: #7F8C8D; font-size: 0.95rem;">舒適度</span>
-                    <span style="color: #2C3E50; font-size: 0.95rem; font-weight: 600;">
-                        {today_summary['periods'][0].get('comfort', '舒適') if today_summary['periods'] else '舒適'}
-                    </span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0;">
-                    <span style="color: #7F8C8D; font-size: 0.95rem;">降雨機率</span>
-                    <span style="color: #4A90E2; font-size: 1rem; font-weight: 700;">
-                        {int(today_summary["max_rain_prob"])}%
-                    </span>
+                <div style="border-top: 2px solid #E8EEF2; padding-top: 1rem; margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin: 0.8rem 0;">
+                        <span style="color: #7F8C8D; font-size: 0.95rem;">舒適度</span>
+                        <span style="color: #2C3E50; font-size: 0.95rem; font-weight: 600;">
+                            {today_summary['periods'][0].get('comfort', '舒適') if today_summary['periods'] else '舒適'}
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.8rem 0;">
+                        <span style="color: #7F8C8D; font-size: 0.95rem;">降雨機率</span>
+                        <span style="color: #4A90E2; font-size: 0.95rem; font-weight: 700;">
+                            {int(today_summary["max_rain_prob"])}%
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,9 +118,7 @@ if parsed_data:
         # 本週預報
         st.markdown('''
         <div class="weather-card" style="margin-top: 1rem;">
-            <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600;">
-                📅 本週預報
-            </h3>
+            <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem;">📅 本週預報</h3>
         ''', unsafe_allow_html=True)
         
         if week_df is not None and not week_df.empty:
@@ -159,19 +155,19 @@ if parsed_data:
     with center_col:
         st.markdown(f'''
         <div class="main-weather-card">
-            <div style="font-size: 1.5rem; color: #2C3E50; margin-bottom: 1rem; font-weight: 700; text-align: center; padding: 0.5rem; background: linear-gradient(135deg, #E8F4FD, #F0F7FF); border-radius: 8px;">
+            <div style="font-size: 1.1rem; color: #7F8C8D; margin-bottom: 1rem; font-weight: 500;">
                 📍 {selected_city}
             </div>
-            <div style="display: flex; align-items: center; justify-content: center; margin: 1.5rem 0;">
+            <div style="display: flex; align-items: center; justify-content: center; margin: 2rem 0;">
                 <div class="temperature-display">
                     {today_summary["max_temp"]}°
                 </div>
-                <div style="margin-left: 2rem; text-align: left; display: flex; flex-direction: column; gap: 0.5rem;">
-                    <div style="color: #E74C3C; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center;">
-                        <span style="margin-right: 0.3rem;">▲</span> {today_summary["max_temp"]}°
+                <div style="margin-left: 2.5rem; text-align: left;">
+                    <div style="color: #E74C3C; font-size: 1.2rem; margin: 0.5rem 0; font-weight: 600;">
+                        ▲ {today_summary["max_temp"]}°
                     </div>
-                    <div style="color: #3498DB; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center;">
-                        <span style="margin-right: 0.3rem;">▼</span> {today_summary["min_temp"]}°
+                    <div style="color: #3498DB; font-size: 1.2rem; margin: 0.5rem 0; font-weight: 600;">
+                        ▼ {today_summary["min_temp"]}°
                     </div>
                 </div>
             </div>
@@ -185,15 +181,10 @@ if parsed_data:
         ''', unsafe_allow_html=True)
         
         # 三時段預報
-        st.markdown('''
-        <div class="weather-card" style="margin-top: 1rem; padding-bottom: 1rem;">
-            <h3 style="color: #4A90E2; margin-bottom: 1.5rem; font-size: 1.2rem; text-align: center; font-weight: 600;">
-                ⏰ 分時段預報
-            </h3>
-        </div>
-        ''', unsafe_allow_html=True)
-        
         if len(today_summary['periods']) >= 3:
+            st.markdown('<div class="weather-card" style="margin-top: 1rem;">', unsafe_allow_html=True)
+            st.markdown('<h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem; text-align: center;">⏰ 分時段預報</h3>', unsafe_allow_html=True)
+            
             cols = st.columns(3)
             time_labels = ['今日白天', '今晚明晨', '明日白天']
             
@@ -204,30 +195,26 @@ if parsed_data:
                     pop = f"{period['pop']}%" if period['pop'] is not None else "--"
                     
                     st.markdown(f'''
-                    <div style="background: white; border: 2px solid rgba(74, 144, 226, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                        <div style="color: #2C3E50; font-size: 1.05rem; font-weight: 600; margin-bottom: 1rem;">
-                            {label}
-                        </div>
-                        <div style="font-size: 3rem; margin: 1rem 0;">
-                            {icon}
-                        </div>
-                        <div style="color: #2C3E50; font-size: 1.15rem; font-weight: 600; margin: 0.8rem 0;">
-                            {temp_range}
-                        </div>
-                        <div style="color: #3498DB; font-size: 1rem; font-weight: 600; margin-top: 0.8rem;">
+                    <div class="time-period-card">
+                        <div class="time-label">{label}</div>
+                        <div class="icon">{icon}</div>
+                        <div class="temp">{temp_range}</div>
+                        <div style="color: #3498DB; font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem;">
                             💧 {pop}
                         </div>
                     </div>
                     ''', unsafe_allow_html=True)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
     
     # ========== 右側欄：空氣品質 + 警報 ==========
     with right_col:
         # 空氣品質
         st.markdown('''
         <div class="weather-card">
-            <h3 style="color: #4A90E2; margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center; font-weight: 600;">
-                💨 空氣品質
-            </h3>
+            <div style="text-align: center;">
+                <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem;">💨 空氣品質</h3>
+                <div style="font-size: 3rem; margin: 1rem 0;">🌬️</div>
         ''', unsafe_allow_html=True)
         
         try:
@@ -247,33 +234,28 @@ if parsed_data:
                             level, color, bg = "不良", "#DC3545", "#F8D7DA"
                         
                         st.markdown(f'''
-                        <div style="text-align: center;">
-                            <div style="font-size: 3rem; margin: 1rem 0;">🌬️</div>
-                            <div style="font-size: 3.5rem; color: {color}; font-weight: 700; margin: 1rem 0;">
-                                {avg_aqi}
-                            </div>
-                            <div style="background: {bg}; color: {color}; border: 2px solid {color}; border-radius: 24px; padding: 0.5rem 1.5rem; display: inline-block; font-size: 1rem; font-weight: 600; margin: 1rem 0;">
-                                {level}
-                            </div>
-                            <div style="font-size: 0.85rem; color: #7F8C8D; margin-top: 1rem;">
-                                資料來源：環保署
-                            </div>
+                        <div style="font-size: 3rem; color: {color}; font-weight: 700; margin: 1rem 0;">
+                            {avg_aqi}
+                        </div>
+                        <div class="status-badge" style="background: {bg}; color: {color}; border-color: {color};">
+                            {level}
+                        </div>
+                        <div style="font-size: 0.8rem; color: #7F8C8D; margin-top: 1rem;">
+                            資料來源：環保署
                         </div>
                         ''', unsafe_allow_html=True)
                     else:
-                        st.markdown('<div style="text-align: center; color: #7F8C8D; font-size: 0.95rem; padding: 2rem 0;">暫無資料</div>', unsafe_allow_html=True)
+                        st.markdown('<div style="color: #7F8C8D; font-size: 0.95rem;">暫無資料</div>', unsafe_allow_html=True)
         except:
-            st.markdown('<div style="text-align: center; color: #7F8C8D; font-size: 0.95rem; padding: 2rem 0;">載入中...</div>', unsafe_allow_html=True)
+            st.markdown('<div style="color: #7F8C8D; font-size: 0.95rem;">載入中...</div>', unsafe_allow_html=True)
         
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div></div>', unsafe_allow_html=True)
         
         # 天氣警報
         st.markdown('''
         <div class="weather-card" style="margin-top: 1rem;">
-            <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem; text-align: center; font-weight: 600;">
-                ⚠️ 天氣警報
-            </h3>
             <div style="text-align: center;">
+                <h3 style="color: #4A90E2; margin-bottom: 1rem; font-size: 1.1rem;">⚠️ 天氣警報</h3>
                 <div style="font-size: 3rem; margin: 1rem 0;">🚨</div>
         ''', unsafe_allow_html=True)
         

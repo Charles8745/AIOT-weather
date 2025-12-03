@@ -1,0 +1,498 @@
+/* 中央氣象署風格 - 藍色清爽設計 */
+
+/* 全域設定 */
+:root {
+    --primary-blue: #4A90E2;
+    --light-blue: #5BA3F5;
+    --bg-blue: linear-gradient(135deg, #5B9BD5 0%, #4A90E2 50%, #3A7BC8 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --text-dark: #2C3E50;
+    --text-light: #7F8C8D;
+    --border-radius: 16px;
+}
+
+/* 移除預設邊距 */
+.main > div {
+    padding: 0 !important;
+}
+
+.block-container {
+    padding: 1.5rem 2rem !important;
+    max-width: 100% !important;
+}
+
+/* 背景 - 極淡藍色漸層（接近白色） */
+section[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #F0F7FF 0%, #E8F2FF 50%, #E0EDFF 100%) !important;
+    min-height: 100vh;
+}
+
+/* 移除黑色背景 */
+.main {
+    background: transparent !important;
+}
+
+div[data-testid="stAppViewContainer"] > div {
+    background: transparent !important;
+}
+
+/* 隱藏側邊欄 */
+section[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+}
+
+/* 主標題 */
+h1 {
+    color: white !important;
+    text-align: center !important;
+    font-size: 2.5rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 白色卡片樣式 - 淡藍邊框 */
+.weather-card {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15) !important;
+    padding: 1.8rem !important;
+    margin: 0.8rem 0 !important;
+    transition: all 0.3s ease !important;
+    border: 2px solid rgba(74, 144, 226, 0.2) !important;
+}
+
+.weather-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.25) !important;
+    border-color: rgba(74, 144, 226, 0.35) !important;
+}
+
+/* Streamlit 欄位套用白色卡片 - 淡藍邊框 */
+div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15) !important;
+    padding: 1.5rem !important;
+    border: 2px solid rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 移除 Streamlit 預設的暗色背景 */
+.stApp {
+    background: transparent !important;
+}
+
+div[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+/* 文字顏色 */
+p, span, div, label {
+    color: var(--text-dark) !important;
+}
+
+h2, h3, h4, h5, h6 {
+    color: var(--text-dark) !important;
+}
+
+/* SelectBox 樣式 */
+.stSelectbox > div > div {
+    background: white !important;
+    border: 2px solid var(--primary-blue) !important;
+    border-radius: 12px !important;
+    color: #2C3E50 !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    padding: 0.8rem 1.2rem !important;
+}
+
+/* SelectBox 內部選項文字 */
+.stSelectbox div[data-baseweb="select"] > div {
+    color: #2C3E50 !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+}
+
+/* SelectBox 下拉選單文字 */
+.stSelectbox [role="option"] {
+    color: #2C3E50 !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+
+/* SelectBox 選中的值 */
+.stSelectbox input {
+    color: #2C3E50 !important;
+    font-weight: 600 !important;
+}
+
+/* 按鈕樣式 - 藍色主題 */
+.stButton > button {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.8rem 1.5rem !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3) !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0) !important;
+}
+
+/* Metric 元件 */
+div[data-testid="stMetric"] {
+    background: white !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+div[data-testid="stMetricValue"] {
+    color: var(--primary-blue) !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: var(--text-light) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+/* Expander 樣式 */
+.streamlit-expanderHeader {
+    background: white !important;
+    border-radius: 12px !important;
+    border: 2px solid var(--light-blue) !important;
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+    padding: 1rem 1.5rem !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background: rgba(74, 144, 226, 0.05) !important;
+}
+
+.streamlit-expanderContent {
+    background: white !important;
+    border-radius: 0 0 12px 12px !important;
+    border: 2px solid var(--light-blue) !important;
+    border-top: none !important;
+    padding: 1rem !important;
+}
+
+/* 主天氣卡片 */
+.main-weather-card {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+    padding: 2.5rem 2rem !important;
+    text-align: center !important;
+    margin: 1rem 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+}
+
+.temperature-display {
+    font-size: 7rem !important;
+    font-weight: 300 !important;
+    color: var(--primary-blue) !important;
+    line-height: 1 !important;
+    letter-spacing: -8px !important;
+}
+
+.weather-icon-large {
+    font-size: 5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.weather-description {
+    font-size: 1.8rem !important;
+    color: var(--text-dark) !important;
+    font-weight: 500 !important;
+    margin-top: 1rem !important;
+}
+
+/* 小卡片網格 */
+.info-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.info-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-blue);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.info-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.info-card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0.5rem 0;
+}
+
+.info-card .label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* 時段預報卡片 */
+.time-period-card {
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+}
+
+.time-period-card .time-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.time-period-card .icon {
+    font-size: 2.5rem;
+    margin: 0.8rem 0;
+}
+
+.time-period-card .temp {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0.5rem 0;
+}
+
+/* 週預報列表 */
+.week-forecast-item {
+    background: linear-gradient(to right, #F8F9FA 0%, #FFFFFF 100%);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left: 3px solid var(--primary-blue);
+    transition: all 0.2s ease;
+}
+
+.week-forecast-item:hover {
+    background: linear-gradient(to right, #E8F4FF 0%, #F8FBFF 100%);
+    transform: translateX(5px);
+}
+
+/* Plotly 圖表 */
+.js-plotly-plot {
+    background: white !important;
+    border-radius: 16px !important;
+    padding: 1rem !important;
+}
+
+/* 狀態標籤 */
+.status-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.3rem;
+}
+
+.status-good {
+    background: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+.status-moderate {
+    background: #FFF3CD;
+    color: #856404;
+    border: 1px solid #FFEAA7;
+}
+
+.status-bad {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+/* 警報卡片 */
+.alert-card {
+    background: #FFF3CD !important;
+    border-left: 5px solid #FFC107 !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.5rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+.alert-danger {
+    background: #F8D7DA !important;
+    border-left-color: #DC3545 !important;
+}
+
+.alert-success {
+    background: #D4EDDA !important;
+    border-left-color: #28A745 !important;
+}
+
+/* DataFrame 樣式 */
+.dataframe {
+    background: white !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+.dataframe th {
+    background: var(--primary-blue) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+}
+
+.dataframe td {
+    color: var(--text-dark) !important;
+    padding: 0.8rem !important;
+}
+
+.dataframe tr:hover {
+    background: rgba(74, 144, 226, 0.05) !important;
+}
+
+/* 滾動條 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-blue);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    .temperature-display {
+        font-size: 5rem !important;
+    }
+    
+    .block-container {
+        padding: 1rem !important;
+    }
+    
+    .info-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .temperature-display {
+        font-size: 4rem !important;
+    }
+    
+    .info-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.weather-card,
+.info-card,
+.time-period-card {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* 載入動畫 */
+.stSpinner > div {
+    border-color: white !important;
+}
+
+/* 成功/錯誤訊息 */
+.stSuccess {
+    background: #D4EDDA !important;
+    color: #155724 !important;
+    border-left: 4px solid #28A745 !important;
+    border-radius: 8px !important;
+}
+
+.stError {
+    background: #F8D7DA !important;
+    color: #721C24 !important;
+    border-left: 4px solid #DC3545 !important;
+    border-radius: 8px !important;
+}
+
+.stWarning {
+    background: #FFF3CD !important;
+    color: #856404 !important;
+    border-left: 4px solid #FFC107 !important;
+    border-radius: 8px !important;
+}
+
+.stInfo {
+    background: #D1ECF1 !important;
+    color: #0C5460 !important;
+    border-left: 4px solid #17A2B8 !important;
+    border-radius: 8px !important;
+}
