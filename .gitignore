@@ -62,3 +62,8 @@ htmlcov/
 
 # Logs
 *.log
+
+# Backup files
+backup_files/
+*_backup.md
+*_old.py
